@@ -1,0 +1,10 @@
+numpy>=1.24
+tqdm>=4.66
+torch>=2.1
+qiskit>=1.0
+qiskit-aer>=0.13
+
+# Optional (challenge):
+# pennylane>=0.38
+# pennylane-qiskit
+# cvxpy
