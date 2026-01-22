@@ -9,6 +9,7 @@
 1. **数据生成**: 自动生成包含随机旋转角度的量子电路，并使用 Qiskit 计算其真实的量子态矢量 (Statevector) 作为标签。
 2. **AI 模型**:
    - **MLP (多层感知机)**: 一个简单的非自回归基线模型，用于快速验证。
+   - **LSTM (长短期记忆网络)**: 一个基于 RNN 的非自回归基线模型，用于对比序列建模能力。
    - **Autoregressive (自回归模型)**: 结合了 LSTM 编码器和 Transformer 解码器的 Seq2Seq 架构，模拟大语言模型 (LLM) 的生成方式逐步预测量子态。
 3. **评估系统**: 使用**量子态保真度 (State Fidelity)** 作为核心指标，衡量模型预测结果与真实物理状态的接近程度。
 
@@ -60,15 +61,25 @@ python -m qsimlm.train_2q_special --model mlp --n_train 20000 --n_test 2000 --ep
 python -m qsimlm.train_2q_special --model autoreg --n_train 20000 --n_test 2000 --epochs 8
 ```
 
+#### 3. 运行 LSTM 基准模型
+介于 MLP 和 Transformer 之间的另一种基线。
+```bash
+python -m qsimlm.train_2q_special --model lstm --n_train 20000 --n_test 2000 --epochs 8
+```
+
 ### 常用参数说明
 | 参数 | 默认值 | 说明 |
 | :--- | :--- | :--- |
-| `--model` | `autoreg` | 选择模型架构：`mlp` (简单) 或 `autoreg` (进阶) |
+| `--model` | `autoreg` | 选择模型架构：`mlp`, `lstm` 或 `autoreg` |
 | `--n_train` | `20000` | 训练集的样本数量。数据越多，模型泛化能力越强。 |
 | `--n_test` | `2000` | 测试集的样本数量，用于计算最终的保真度。 |
 | `--epochs` | `8` | 训练轮数。增加轮数通常能提升效果，但需注意过拟合。 |
 | `--lr` | `3e-4` | 学习率 (Learning Rate)。 |
 | `--seed` | `0` | 随机种子，保证结果可复现。 |
+| `--batch_size` | `256` | 批次大小。 |
+| `--noisy` | `False` | 开启噪声模拟 (使用密度矩阵作为标签)。 |
+| `--noise_prob` | `0.01` | Depolarizing channel 的噪声强度 (仅在开启 `--noisy` 时有效)。 |
+| `--use_trig` | `False` | 特征工程：将输入角度 $x$ 扩展为 $[\sin(x), \cos(x)]$。 |
 
 ## 项目文件结构
 

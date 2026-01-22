@@ -18,6 +18,10 @@ echo "[run.sh] Installing requirements..."
 pip install -r requirements.txt
 
 echo "[run.sh] Running a short training (autoreg)..."
+# 你可以尝试修改参数，例如：
+# --model lstm        : 运行 LSTM 模型
+# --noisy             : 开启噪声模拟
+# --use_trig          : 使用三角函数特征
 python -m qsimlm.train_2q_special --model autoreg --n_train 20000 --n_test 2000 --epochs 8
 
 echo "[run.sh] Done."
