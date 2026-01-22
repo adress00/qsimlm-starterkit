@@ -3,8 +3,8 @@ tqdm>=4.66
 torch>=2.1
 qiskit>=1.0
 qiskit-aer>=0.13
+cvxpy>=1.3
 
 # Optional (challenge):
 # pennylane>=0.38
 # pennylane-qiskit
-# cvxpy

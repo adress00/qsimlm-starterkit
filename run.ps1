@@ -20,4 +20,7 @@ pip install -r requirements.txt
 Write-Host "[run.ps1] Running a short training (autoreg)..."
 python -m qsimlm.train_2q_special --model autoreg --n_train 20000 --n_test 2000 --epochs 8
 
+Write-Host "[run.ps1] Running noisy evaluation (no checkpoint)..."
+python -m qsimlm.eval_noisy --model mlp --n_test 2000 --sigma 0.02
+
 Write-Host "[run.ps1] Done."

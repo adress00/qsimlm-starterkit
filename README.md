@@ -70,6 +70,17 @@ python -m qsimlm.train_2q_special --model autoreg --n_train 20000 --n_test 2000 
 | `--lr` | `3e-4` | 学习率 (Learning Rate)。 |
 | `--seed` | `0` | 随机种子，保证结果可复现。 |
 
+### 含噪预测 (Noisy Evaluation)
+为了模拟测量或估计误差，我们提供了一个含噪评估脚本，会在目标态的实部/虚部上添加高斯噪声并计算保真度（保真度内部会归一化）。
+
+```bash
+python -m qsimlm.eval_noisy --model mlp --n_test 2000 --sigma 0.02
+```
+
+参数：
+- `--sigma`: 高斯噪声的标准差，默认 `0.01`。
+- `--ckpt`: 可选；如提供，将加载对应模型权重，否则使用当前代码定义的模型结构。
+
 ## 项目文件结构
 
 ```text
